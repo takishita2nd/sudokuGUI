@@ -12,15 +12,31 @@ namespace sudokuGUI
         private const int width = 192;
         private const int height = 256;
         private asd.TextureObject2D _texture;
+        PaletteSquareObject[,] paletteSquareObjects = new PaletteSquareObject[3, 3];
 
         public Palette()
         {
             _texture = new asd.TextureObject2D();
+            for(int row = 0; row < 3; row++)
+            {
+                for(int col = 0; col < 3; col++)
+                {
+                    paletteSquareObjects[row, col] = new PaletteSquareObject(row, col);
+                }
+            }
         }
 
-        public asd.TextureObject2D getPaletteTexture()
+        public void setEngine()
         {
-            return _texture;
+            asd.Engine.AddObject2D(_texture);
+            for (int row = 0; row < 3; row++)
+            {
+                for (int col = 0; col < 3; col++)
+                {
+                    asd.Engine.AddObject2D(paletteSquareObjects[row, col].getBackTexture());
+                    asd.Engine.AddObject2D(paletteSquareObjects[row, col].getTextObject());
+                }
+            }
         }
 
         public void Show(asd.Vector2DF pos)
@@ -28,11 +44,28 @@ namespace sudokuGUI
             palettePosition = new asd.Vector2DF(pos.X, pos.Y - 64);
             _texture.Position = palettePosition;
             _texture.Texture = Resource.getPalette();
+            int value = 1;
+            for (int row = 0; row < 3; row++)
+            {
+                for (int col = 0; col < 3; col++)
+                {
+                    paletteSquareObjects[row, col].setPosition(pos);
+                    paletteSquareObjects[row, col].setValue(value);
+                    value++;
+                }
+            }
         }
 
         public void Hide()
         {
             _texture.Texture = null;
+            for (int row = 0; row < 3; row++)
+            {
+                for (int col = 0; col < 3; col++)
+                {
+                    paletteSquareObjects[row, col].setValue(0);
+                }
+            }
         }
 
         public bool isClick(asd.Vector2DF pos)

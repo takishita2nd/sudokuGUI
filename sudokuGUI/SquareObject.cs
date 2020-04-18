@@ -8,26 +8,26 @@ namespace sudokuGUI
 {
     class SquareObject
     {
-        private int _x;
-        private int _y;
-        private int _row;
-        private int _col;
+        protected int _x;
+        protected int _y;
+        protected int _row;
+        protected int _col;
         private int _value;
-        private asd.TextureObject2D _backTexture;
-        private asd.TextObject2D _valueText;
-        private const int offsetX = 10;
-        private const int offsetY = 10;
-        private const int fontOffsetX = 19;
-        private const int fontOffsetY = 9;
-        private const int width = 64;
-        private const int height = 64;
+        protected asd.TextureObject2D _backTexture;
+        protected asd.TextObject2D _valueText;
+        protected const int offsetX = 10;
+        protected const int offsetY = 10;
+        protected const int fontOffsetX = 19;
+        protected const int fontOffsetY = 9;
+        protected const int width = 64;
+        protected const int height = 64;
 
         public SquareObject(int row, int col)
         {
             _row = row;
             _col = col;
-            _x = row * 64 + offsetX;
-            _y = col * 64 + offsetY;
+            _x = row * width + offsetX;
+            _y = col * height + offsetY;
             _value = 0;
 
             _backTexture = new asd.TextureObject2D();

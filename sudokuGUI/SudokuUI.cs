@@ -53,7 +53,7 @@ namespace sudokuGUI
 
             // パレット
             palette = new Palette();
-            asd.Engine.AddObject2D(palette.getPaletteTexture());
+            palette.setEngine();
 
             // Altseedが進行可能かチェックする。
             while (asd.Engine.DoEvents())
