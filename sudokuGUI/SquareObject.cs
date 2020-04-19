@@ -52,6 +52,11 @@ namespace sudokuGUI
             }
         }
 
+        public void hide()
+        {
+            _valueText.Text = "";
+        }
+
         public asd.TextureObject2D getBackTexture()
         {
             return _backTexture;

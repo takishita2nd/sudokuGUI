@@ -11,6 +11,7 @@ namespace sudokuGUI
         private static asd.Texture2D _texture = null;
         private static asd.Texture2D _palette = null;
         private static asd.Font _font = null;
+        private static asd.Font _fontBatsu = null;
 
         public static asd.Texture2D getTexture()
         {
@@ -37,6 +38,15 @@ namespace sudokuGUI
                 _font = asd.Engine.Graphics.CreateFont("number.aff");
             }
             return _font;
+        }
+
+        public static asd.Font getFontBatsu()
+        {
+            if (_fontBatsu == null)
+            {
+                _fontBatsu = asd.Engine.Graphics.CreateFont("batsu.aff");
+            }
+            return _fontBatsu;
         }
     }
 }

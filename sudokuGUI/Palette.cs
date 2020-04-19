@@ -13,6 +13,7 @@ namespace sudokuGUI
         private const int height = 256;
         private asd.TextureObject2D _texture;
         PaletteSquareObject[,] paletteSquareObjects = new PaletteSquareObject[3, 3];
+        PaletteBatsuSquareObject PaletteBatsuSquareObject = new PaletteBatsuSquareObject(0, -1);
 
         public Palette()
         {
@@ -37,9 +38,11 @@ namespace sudokuGUI
                     asd.Engine.AddObject2D(paletteSquareObjects[row, col].getTextObject());
                 }
             }
+            asd.Engine.AddObject2D(PaletteBatsuSquareObject.getBackTexture());
+            asd.Engine.AddObject2D(PaletteBatsuSquareObject.getTextObject());
         }
 
-        public void Show(asd.Vector2DF pos)
+        public void show(asd.Vector2DF pos)
         {
             palettePosition = new asd.Vector2DF(pos.X, pos.Y - 64);
             _texture.Position = palettePosition;
@@ -54,18 +57,21 @@ namespace sudokuGUI
                     value++;
                 }
             }
+            PaletteBatsuSquareObject.setPosition(pos);
+            PaletteBatsuSquareObject.showBatsu();
         }
 
-        public void Hide()
+        public void hide()
         {
             _texture.Texture = null;
             for (int row = 0; row < 3; row++)
             {
                 for (int col = 0; col < 3; col++)
                 {
-                    paletteSquareObjects[row, col].setValue(0);
+                    paletteSquareObjects[row, col].hide();
                 }
             }
+            PaletteBatsuSquareObject.hide();
         }
 
         public bool isClick(asd.Vector2DF pos)

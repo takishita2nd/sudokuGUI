@@ -76,14 +76,14 @@ namespace sudokuGUI
                     {
                         if (!palette.isClick(pos))
                         {
-                            palette.Hide();
+                            palette.hide();
                             mouseHold = false;
                         }
                     }
                     else
                     {
                         mouseHold = true;
-                        palette.Show(pos);
+                        palette.show(pos);
                     }
                 }
 
