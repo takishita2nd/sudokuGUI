@@ -63,7 +63,6 @@ namespace sudokuGUI
 
         public void hide()
         {
-            _texture.Texture = null;
             for (int row = 0; row < 3; row++)
             {
                 for (int col = 0; col < 3; col++)
@@ -72,6 +71,7 @@ namespace sudokuGUI
                 }
             }
             PaletteBatsuSquareObject.hide();
+            _texture.Texture = null;
         }
 
         public bool isClick(asd.Vector2DF pos)
@@ -85,6 +85,37 @@ namespace sudokuGUI
             {
                 return false;
             }
+        }
+
+        public void updateTexture(asd.Vector2DF pos)
+        {
+            for (int row = 0; row < 3; row++)
+            {
+                for (int col = 0; col < 3; col++)
+                {
+                    paletteSquareObjects[row, col].updateTexture(pos);
+                }
+            }
+            PaletteBatsuSquareObject.updateTexture(pos);
+        }
+
+        public int getClickValue(asd.Vector2DF pos)
+        {
+            for (int row = 0; row < 3; row++)
+            {
+                for (int col = 0; col < 3; col++)
+                {
+                    if(paletteSquareObjects[row, col].isClick(pos) == true)
+                    {
+                        return paletteSquareObjects[row, col].getValue();
+                    }
+                }
+            }
+            if (PaletteBatsuSquareObject.isClick(pos))
+            {
+                return 0;
+            }
+            return 0;
         }
     }
 }

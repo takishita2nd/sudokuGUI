@@ -79,5 +79,23 @@ namespace sudokuGUI
                 _backTexture.Texture = null;
             }
         }
+
+        public bool isClick(asd.Vector2DF pos)
+        {
+            if (pos.X > _x && pos.X < _x + width
+                && pos.Y > _y && pos.Y < _y + height)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public int getValue()
+        {
+            return _value;
+        }
     }
 }

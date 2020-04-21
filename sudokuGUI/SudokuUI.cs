@@ -10,10 +10,12 @@ namespace sudokuGUI
     {
         private bool mouseHold;
         private Palette palette = null;
+        private SquareObject clickedSquareObject = null;
 
         public SudokuUI()
         {
             mouseHold = false;
+            clickedSquareObject = null;
         }
 
         public void Run()
@@ -69,6 +71,10 @@ namespace sudokuGUI
                         }
                     }
                 }
+                else
+                {
+                    //palette.updateTexture(pos);
+                }
 
                 if (asd.Engine.Mouse.LeftButton.ButtonState == asd.ButtonState.Push)
                 {
@@ -79,11 +85,31 @@ namespace sudokuGUI
                             palette.hide();
                             mouseHold = false;
                         }
+                        else
+                        {
+                            int value = palette.getClickValue(pos);
+                            if(clickedSquareObject != null)
+                            {
+                                clickedSquareObject.setValue(value);
+                                palette.hide();
+                                mouseHold = false;
+                            }
+                        }
                     }
                     else
                     {
                         mouseHold = true;
                         palette.show(pos);
+                        for (int row = 0; row < 9; row++)
+                        {
+                            for (int col = 0; col < 9; col++)
+                            {
+                                if (squareObjects[row, col].isClick(pos) == true)
+                                {
+                                    clickedSquareObject = squareObjects[row, col];
+                                }
+                            }
+                        }
                     }
                 }
 
