@@ -6,24 +6,20 @@ using System.Threading.Tasks;
 
 namespace sudokuGUI
 {
-    class SquareObject
+    class SquareObject : ObjectBase
     {
-        protected int _x;
-        protected int _y;
         protected int _row;
         protected int _col;
         private int _value;
-        protected asd.TextureObject2D _backTexture;
-        protected asd.TextObject2D _valueText;
         protected const int offsetX = 10;
         protected const int offsetY = 10;
         protected const int fontOffsetX = 19;
         protected const int fontOffsetY = 9;
-        protected const int width = 64;
-        protected const int height = 64;
 
         public SquareObject(int row, int col)
         {
+            width = 64;
+            height = 64;
             _row = row;
             _col = col;
             _x = row * width + offsetX;
@@ -54,17 +50,8 @@ namespace sudokuGUI
 
         public void hide()
         {
+            _backTexture.Texture = null;
             _valueText.Text = "";
-        }
-
-        public asd.TextureObject2D getBackTexture()
-        {
-            return _backTexture;
-        }
-
-        public asd.TextObject2D getTextObject()
-        {
-            return _valueText;
         }
 
         public void updateTexture(asd.Vector2DF pos)
@@ -77,19 +64,6 @@ namespace sudokuGUI
             else
             {
                 _backTexture.Texture = null;
-            }
-        }
-
-        public bool isClick(asd.Vector2DF pos)
-        {
-            if (pos.X > _x && pos.X < _x + width
-                && pos.Y > _y && pos.Y < _y + height)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
             }
         }
 

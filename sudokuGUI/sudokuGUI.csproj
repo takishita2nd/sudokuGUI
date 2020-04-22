@@ -91,8 +91,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Button.cs" />
     <Compile Include="Candidate.cs" />
+    <Compile Include="ClearButton.cs" />
     <Compile Include="FileOutput.cs" />
+    <Compile Include="ObjectBase.cs" />
     <Compile Include="Palette.cs" />
     <Compile Include="PaletteBatsuSquareObject.cs" />
     <Compile Include="PaletteSquareObject.cs" />

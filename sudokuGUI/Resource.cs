@@ -9,9 +9,11 @@ namespace sudokuGUI
     static class Resource
     {
         private static asd.Texture2D _texture = null;
+        private static asd.Texture2D _buttonTexture = null;
         private static asd.Texture2D _palette = null;
         private static asd.Font _font = null;
         private static asd.Font _fontBatsu = null;
+        private static asd.Font _fonttext = null;
 
         public static asd.Texture2D getTexture()
         {
@@ -20,6 +22,15 @@ namespace sudokuGUI
                 _texture = asd.Engine.Graphics.CreateTexture2D("square.png");
             }
             return _texture;
+        }
+
+        public static asd.Texture2D getButtonTexture()
+        {
+            if (_buttonTexture == null)
+            {
+                _buttonTexture = asd.Engine.Graphics.CreateTexture2D("button.png");
+            }
+            return _buttonTexture;
         }
 
         public static asd.Texture2D getPalette()
@@ -47,6 +58,15 @@ namespace sudokuGUI
                 _fontBatsu = asd.Engine.Graphics.CreateFont("batsu.aff");
             }
             return _fontBatsu;
+        }
+
+        public static asd.Font getTextFont()
+        {
+            if (_fonttext == null)
+            {
+                _fonttext = asd.Engine.Graphics.CreateFont("text.aff");
+            }
+            return _fonttext;
         }
     }
 }

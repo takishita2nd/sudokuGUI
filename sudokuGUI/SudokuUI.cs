@@ -53,9 +53,21 @@ namespace sudokuGUI
                 }
             }
 
+            // ボタン
+            Button clear = new ClearButton();
+            asd.Engine.AddObject2D(clear.getBackTexture());
+            asd.Engine.AddObject2D(clear.getTextObject());
+
+            Button start = new Button(600, 570, "解析開始");
+            asd.Engine.AddObject2D(start.getBackTexture());
+            asd.Engine.AddObject2D(start.getTextObject());
+
             // パレット
             palette = new Palette();
             palette.setEngine();
+
+
+
 
             // Altseedが進行可能かチェックする。
             while (asd.Engine.DoEvents())
@@ -70,10 +82,12 @@ namespace sudokuGUI
                             squareObjects[row, col].updateTexture(pos);
                         }
                     }
+                    clear.updateTexture(pos);
+                    start.updateTexture(pos);
                 }
                 else
                 {
-                    //palette.updateTexture(pos);
+                    palette.updateTexture(pos);
                 }
 
                 if (asd.Engine.Mouse.LeftButton.ButtonState == asd.ButtonState.Push)
@@ -98,15 +112,22 @@ namespace sudokuGUI
                     }
                     else
                     {
-                        mouseHold = true;
-                        palette.show(pos);
-                        for (int row = 0; row < 9; row++)
+                        if (clear.isClick(pos))
                         {
-                            for (int col = 0; col < 9; col++)
+                            clear.onClick(squareObjects);
+                        }
+                        else
+                        {
+                            mouseHold = true;
+                            palette.show(pos);
+                            for (int row = 0; row < 9; row++)
                             {
-                                if (squareObjects[row, col].isClick(pos) == true)
+                                for (int col = 0; col < 9; col++)
                                 {
-                                    clickedSquareObject = squareObjects[row, col];
+                                    if (squareObjects[row, col].isClick(pos) == true)
+                                    {
+                                        clickedSquareObject = squareObjects[row, col];
+                                    }
                                 }
                             }
                         }
