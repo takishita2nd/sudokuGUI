@@ -24,13 +24,13 @@ namespace sudokuGUI
                     squares[row, col] = new Square(squareObjects[row, col].getValue(), row, col);
                 }
             }
-            Sudoku sudoku = new Sudoku(squares, null);
-            sudoku.run();
+            Sudoku sudoku = new Sudoku(squares);
+            var ret = sudoku.run();
             for (int row = 0; row < 9; row++)
             {
                 for (int col = 0; col < 9; col++)
                 {
-                    squareObjects[row, col].setValue(squareObjects[row, col].getValue());
+                    squareObjects[row, col].setValue(ret[row, col].GetValue());
                 }
             }
         }

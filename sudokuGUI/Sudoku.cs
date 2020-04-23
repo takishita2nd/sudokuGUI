@@ -9,21 +9,19 @@ namespace sudoku
     class Sudoku
     {
         private Square[,] _square;
-        private FileOutput _out;
 
         /**
          * コンストラクタ
          */
-        public Sudoku(Square[,] square, string outfile)
+        public Sudoku(Square[,] square)
         {
             _square = square;
-            _out = new FileOutput(outfile);
         }
 
         /**
          * 実行
          */
-        public void run()
+        public Square[,] run()
         {
             bool roop = true;
             int now_count = 0;
@@ -51,23 +49,22 @@ namespace sudoku
 
                 if (prev_coount == now_count)
                 {
-                    _out.Output("仮置きロジック");
                     Square s = doKarioki(_square);
                     if (s == null)
                     {
                         Console.WriteLine("失敗しました");
-                        return;
+                        return null;
                     }
                     else
                     {
                         _square[s.Row, s.Col].SetValue(s.GetValue());
-                        _out.Output(s.Row, s.Col, s.GetValue());
                     }
                 }
 
                 roop = !checkEnd(_square);
-                _out.Output(_square);
             }
+
+            return _square;
         }
 
         /**
@@ -213,7 +210,6 @@ namespace sudoku
                             if (count == 1)
                             {
                                 squares[i, j].SetValue(number);
-                                _out.Output(i, j, number);
                             }
                         }
                     }
@@ -327,7 +323,6 @@ namespace sudoku
         {
             Square ret = null;
             List<Square> kariokiList = searchKariokiSquare(squares);
-            _out.Output(kariokiList);
             foreach (var s in kariokiList)
             {
                 bool roop = true;
@@ -338,7 +333,6 @@ namespace sudoku
                 }
                 Square[,] copySquare = makeClone(squares);
                 copySquare[s.Row, s.Col].SetValue(kariValue);
-                _out.Output(s.Row, s.Col, kariValue);
                 int now_count = 0;
                 int prev_coount = 0;
                 while (roop)
@@ -361,7 +355,6 @@ namespace sudoku
 
                     if (checkContradict(copySquare))
                     {
-                        _out.Output("巻き戻し");
                         break;
                     }
 
@@ -370,7 +363,6 @@ namespace sudoku
 
                     if (prev_coount == now_count)
                     {
-                        _out.Output("仮置きロジック");
                         Square s2 = doKarioki(copySquare);
                         if (s2 == null)
                         {
@@ -379,7 +371,6 @@ namespace sudoku
                         else
                         {
                             copySquare[s2.Row, s2.Col].SetValue(s2.GetValue());
-                            _out.Output(s2.Row, s2.Col, s2.GetValue());
                         }
                     }
 
@@ -389,7 +380,6 @@ namespace sudoku
                         s.SetValue(kariValue);
                         ret = s;
                     }
-                    _out.Output(copySquare);
                 }
                 if(ret != null)
                 {
