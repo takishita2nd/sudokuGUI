@@ -91,6 +91,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnalyzeButton.cs" />
     <Compile Include="Button.cs" />
     <Compile Include="Candidate.cs" />
     <Compile Include="ClearButton.cs" />

@@ -54,13 +54,16 @@ namespace sudokuGUI
             }
 
             // ボタン
+            List<Button> buttons = new List<Button>();
             Button clear = new ClearButton();
             asd.Engine.AddObject2D(clear.getBackTexture());
             asd.Engine.AddObject2D(clear.getTextObject());
+            buttons.Add(clear);
 
-            Button start = new Button(600, 570, "解析開始");
+            Button start = new AnalyzeButton();
             asd.Engine.AddObject2D(start.getBackTexture());
             asd.Engine.AddObject2D(start.getTextObject());
+            buttons.Add(start);
 
             // パレット
             palette = new Palette();
@@ -82,8 +85,10 @@ namespace sudokuGUI
                             squareObjects[row, col].updateTexture(pos);
                         }
                     }
-                    clear.updateTexture(pos);
-                    start.updateTexture(pos);
+                    foreach(Button button in buttons)
+                    {
+                        button.updateTexture(pos);
+                    }
                 }
                 else
                 {
@@ -112,11 +117,17 @@ namespace sudokuGUI
                     }
                     else
                     {
-                        if (clear.isClick(pos))
+                        bool isButtonClisk = false;
+                        foreach (Button button in buttons)
                         {
-                            clear.onClick(squareObjects);
+                            if (button.isClick(pos))
+                            {
+                                button.onClick(squareObjects);
+                                isButtonClisk = true;
+                            }
                         }
-                        else
+
+                        if (isButtonClisk == false)
                         {
                             mouseHold = true;
                             palette.show(pos);
