@@ -22,8 +22,8 @@ namespace sudokuGUI
             height = 64;
             _row = row;
             _col = col;
-            _x = row * width + offsetX;
-            _y = col * height + offsetY;
+            _x = col * width + offsetX;
+            _y = row * height + offsetY;
             _value = 0;
 
             _backTexture = new asd.TextureObject2D();

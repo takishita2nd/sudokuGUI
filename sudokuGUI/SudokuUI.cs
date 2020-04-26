@@ -11,6 +11,10 @@ namespace sudokuGUI
         private bool mouseHold;
         private Palette palette = null;
         private SquareObject clickedSquareObject = null;
+        private const int offsetX = 10;
+        private const int offsetY = 10;
+        private const int width = 576;
+        private const int height = 576;
 
         public SudokuUI()
         {
@@ -32,8 +36,6 @@ namespace sudokuGUI
 
 
             // マス
-            int offsetX = 10;
-            int offsetY = 10;
             asd.Texture2D texture = asd.Engine.Graphics.CreateTexture2D("squares.png");
             var square = new asd.TextureObject2D();
             square.Position = new asd.Vector2DF(offsetX, offsetY);
@@ -129,15 +131,18 @@ namespace sudokuGUI
 
                         if (isButtonClisk == false)
                         {
-                            mouseHold = true;
-                            palette.show(pos);
-                            for (int row = 0; row < 9; row++)
+                            if (isClick(pos) == true)
                             {
-                                for (int col = 0; col < 9; col++)
+                                mouseHold = true;
+                                palette.show(pos);
+                                for (int row = 0; row < 9; row++)
                                 {
-                                    if (squareObjects[row, col].isClick(pos) == true)
+                                    for (int col = 0; col < 9; col++)
                                     {
-                                        clickedSquareObject = squareObjects[row, col];
+                                        if (squareObjects[row, col].isClick(pos) == true)
+                                        {
+                                            clickedSquareObject = squareObjects[row, col];
+                                        }
                                     }
                                 }
                             }
@@ -153,5 +158,19 @@ namespace sudokuGUI
             asd.Engine.Terminate();
 
         }
+
+        private bool isClick(asd.Vector2DF pos)
+        {
+            if (pos.X > offsetX && pos.X < offsetX + width &&
+                pos.Y > offsetY && pos.Y < offsetY + height)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
+
 }

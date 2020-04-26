@@ -15,8 +15,8 @@ namespace sudokuGUI
 
         public void setPosition(asd.Vector2DF pos)
         {
-            _x = _row * width + (int)pos.X;
-            _y = _col * height + (int)pos.Y;
+            _x = _col * width + (int)pos.X;
+            _y = _row * height + (int)pos.Y;
 
             _backTexture.Position = new asd.Vector2DF(_x, _y);
             _valueText.Position = new asd.Vector2DF(_x + fontOffsetX, _y + fontOffsetY);
