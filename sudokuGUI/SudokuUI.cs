@@ -115,6 +115,22 @@ namespace sudokuGUI
                                 palette.hide();
                                 mouseHold = false;
                             }
+                            bool conflict = checkInputParameter(squareObjects);
+                            if(conflict == true)
+                            {
+                                start.setEnable(false);
+                            }
+                            else
+                            {
+                                for (int row = 0; row < 9; row++)
+                                {
+                                    for (int col = 0; col < 9; col++)
+                                    {
+                                        squareObjects[row, col].setFontColor(SquareObject.FontColor.Black);
+                                    }
+                                }
+                                start.setEnable(true);
+                            }
                         }
                     }
                     else
@@ -169,6 +185,111 @@ namespace sudokuGUI
             else
             {
                 return false;
+            }
+        }
+
+        private bool checkInputParameter(SquareObject[,] squareObjects)
+        {
+            bool conflict = false;
+            for(int row = 0; row < 9; row++)
+            {
+                for(int col = 0; col < 9; col++)
+                {
+                    if(squareObjects[row,col].isSetValue() == true)
+                    {
+                        int value = squareObjects[row,col].getValue();
+                        bool ret = checkRowNumber(squareObjects, row, col, value);
+                        ret |= checkColNumber(squareObjects, row, col, value);
+                        ret |= check9AreaNumber(squareObjects, row, col, value);
+                        if(ret == true)
+                        {
+                            squareObjects[row, col].setFontColor(SquareObject.FontColor.Red);
+                            conflict = true;
+                        }
+                    }
+                }
+            }
+            return conflict;
+        }
+
+        private bool checkRowNumber(SquareObject[,] squareObjects, int row, int col, int value)
+        {
+            bool ret = false;
+            for(int c = 0; c < 9; c++)
+            {
+                if(c != col &&
+                    squareObjects[row, c].getValue() == value)
+                {
+                    squareObjects[row, c].setFontColor(SquareObject.FontColor.Red);
+                    ret = true;
+                }
+            }
+            return ret;
+        }
+
+        private bool checkColNumber(SquareObject[,] squareObjects, int row, int col, int value)
+        {
+            bool ret = false;
+            for (int r = 0; r < 9; r++)
+            {
+                if (r != row &&
+                    squareObjects[r, col].getValue() == value)
+                {
+                    squareObjects[r, col].setFontColor(SquareObject.FontColor.Red);
+                    ret = true;
+                }
+            }
+            return ret;
+        }
+
+        private bool check9AreaNumber(SquareObject[,] squareObjects, int row, int col, int value)
+        {
+            bool ret = false;
+            int rowStart;
+            int colStart;
+            getRowCol9Area(row, col, out rowStart, out colStart);
+
+            for (int r = rowStart; r < rowStart + 3; r++)
+            {
+                for (int c = colStart; c < colStart + 3; c++)
+                {
+                    if (r != row && c != col &&
+                        squareObjects[r, c].getValue() == value)
+                    {
+                        squareObjects[r, c].setFontColor(SquareObject.FontColor.Red);
+                        ret = true;
+                    }
+                }
+            }
+            return ret;
+        }
+
+        private void getRowCol9Area(int row, int col, out int rowStart, out int colStart)
+        {
+            if (row >= 0 && row <= 2)
+            {
+                rowStart = 0;
+            }
+            else if (row >= 3 && row <= 5)
+            {
+                rowStart = 3;
+            }
+            else
+            {
+                rowStart = 6;
+            }
+
+            if (col >= 0 && col <= 2)
+            {
+                colStart = 0;
+            }
+            else if (col >= 3 && col <= 5)
+            {
+                colStart = 3;
+            }
+            else
+            {
+                colStart = 6;
             }
         }
     }

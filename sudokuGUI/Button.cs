@@ -11,6 +11,7 @@ namespace sudokuGUI
         private string _text;
         private const int fontOffsetX = 39;
         private const int fontOffsetY = 9;
+        protected bool enable = true;
 
         public Button(int x, int y, string text)
         {
@@ -40,6 +41,11 @@ namespace sudokuGUI
             {
                 _backTexture.Texture = null;
             }
+        }
+
+        public void setEnable(bool enable)
+        {
+            this.enable = enable;
         }
 
         public virtual void onClick(SquareObject[,] squareObjects)

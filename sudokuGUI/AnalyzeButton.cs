@@ -16,6 +16,11 @@ namespace sudokuGUI
 
         public override void onClick(SquareObject[,] squareObjects)
         {
+            if(enable == false)
+            {
+                return;
+            }
+
             Square[,] squares = new Square[9, 9];
             for (int row = 0; row < 9; row++)
             {

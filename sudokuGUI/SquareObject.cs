@@ -8,6 +8,12 @@ namespace sudokuGUI
 {
     class SquareObject : ObjectBase
     {
+        public enum FontColor
+        {
+            Black,
+            Red
+        }
+
         protected int _row;
         protected int _col;
         private int _value;
@@ -70,6 +76,33 @@ namespace sudokuGUI
         public int getValue()
         {
             return _value;
+        }
+
+        public bool isSetValue()
+        {
+            if(_value == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public void setFontColor(FontColor color)
+        {
+            switch (color)
+            {
+                case FontColor.Black:
+                    _valueText.Font = Resource.getFont();
+                    break;
+                case FontColor.Red:
+                    _valueText.Font = Resource.getFontRed();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
