@@ -48,7 +48,7 @@ namespace sudokuGUI
             this.enable = enable;
         }
 
-        public virtual void onClick(SquareObject[,] squareObjects)
+        public virtual void onClick(SquareObject[,] squareObjects, Message message)
         {
             throw new NotImplementedException();
         }

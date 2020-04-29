@@ -11,10 +11,9 @@ namespace sudokuGUI
     {
         public AnalyzeButton() : base(600, 570, "解析開始")
         {
-
         }
 
-        public override void onClick(SquareObject[,] squareObjects)
+        public override void onClick(SquareObject[,] squareObjects, Message message)
         {
             if(enable == false)
             {
@@ -31,6 +30,12 @@ namespace sudokuGUI
             }
             Sudoku sudoku = new Sudoku(squares);
             var ret = sudoku.run();
+            if(ret == null)
+            {
+                message.show();
+                return;
+            }
+
             for (int row = 0; row < 9; row++)
             {
                 for (int col = 0; col < 9; col++)

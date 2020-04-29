@@ -9,6 +9,7 @@ namespace sudoku
     class Sudoku
     {
         private Square[,] _square;
+        private int kariokiCount = 0;
 
         /**
          * コンストラクタ
@@ -49,6 +50,7 @@ namespace sudoku
 
                 if (prev_coount == now_count)
                 {
+                    kariokiCount = 0;
                     Square s = doKarioki(_square);
                     if (s == null)
                     {
@@ -323,6 +325,12 @@ namespace sudoku
         {
             Square ret = null;
             List<Square> kariokiList = searchKariokiSquare(squares);
+            kariokiCount++;
+            if(kariokiCount >= 100)
+            {
+                return null;
+            }
+
             foreach (var s in kariokiList)
             {
                 bool roop = true;

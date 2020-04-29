@@ -67,6 +67,11 @@ namespace sudokuGUI
             asd.Engine.AddObject2D(start.getTextObject());
             buttons.Add(start);
 
+            // メッセージ
+            Message message = new Message(10, 640, "解析に失敗しました");
+            asd.Engine.AddObject2D(message.getTextObject());
+            message.hide();
+
             // パレット
             palette = new Palette();
             palette.setEngine();
@@ -99,6 +104,7 @@ namespace sudokuGUI
 
                 if (asd.Engine.Mouse.LeftButton.ButtonState == asd.ButtonState.Push)
                 {
+                    message.hide();
                     if (mouseHold)
                     {
                         if (!palette.isClick(pos))
@@ -140,7 +146,7 @@ namespace sudokuGUI
                         {
                             if (button.isClick(pos))
                             {
-                                button.onClick(squareObjects);
+                                button.onClick(squareObjects, message);
                                 isButtonClisk = true;
                             }
                         }

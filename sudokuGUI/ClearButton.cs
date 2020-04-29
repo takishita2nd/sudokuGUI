@@ -13,8 +13,9 @@ namespace sudokuGUI
 
         }
 
-        public override void onClick(SquareObject[,] squareObjects)
+        public override void onClick(SquareObject[,] squareObjects, Message message)
         {
+            message.hide();
             for (int row = 0; row < 9; row++)
             {
                 for (int col = 0; col < 9; col++)

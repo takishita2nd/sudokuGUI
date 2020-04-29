@@ -96,6 +96,7 @@
     <Compile Include="Candidate.cs" />
     <Compile Include="ClearButton.cs" />
     <Compile Include="FileOutput.cs" />
+    <Compile Include="Message.cs" />
     <Compile Include="ObjectBase.cs" />
     <Compile Include="Palette.cs" />
     <Compile Include="PaletteBatsuSquareObject.cs" />
