@@ -416,7 +416,7 @@ namespace sudoku
                         {
                             if (squares[row + i, col + j].isConfirmed() == false)
                             {
-                                temp.Add(_square[row + i, col + j]);
+                                temp.Add(squares[row + i, col + j]);
                             }
                         }
                     }
